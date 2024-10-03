@@ -1,0 +1,82 @@
+<div
+  class="tabbed-set tabbed-alternate"
+  data-tabs="1:2"
+  style="--md-indicator-x: 0px; --md-indicator-width: 77px"
+>
+  <input
+    checked="checked"
+    id="__tabbed_1_1"
+    name="__tabbed_1"
+    type="radio"
+  /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" />
+  <div class="tabbed-labels tabbed-labels--linked">
+    <label for="__tabbed_1_1"
+      ><a href="#__tabbed_1_1" tabindex="-1">OpenAI</a></label
+    ><label for="__tabbed_1_2"
+      ><a href="#__tabbed_1_2" tabindex="-1">AWS Bedrock</a></label
+    >
+  </div>
+  <div class="tabbed-content">
+    <div class="tabbed-block">
+      <p>
+        This guide utilizes OpenAI for running some metrics, so ensure you have
+        your OpenAI key ready and available in your environment.
+      </p>
+      <p></p>
+      <div class="language-python highlight">
+        <pre
+          id="__code_2"
+        ><span></span><button class="md-clipboard md-icon" title="Copy to clipboard" data-clipboard-target="#__code_2 > code"></button><code class="md-code__content"><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-2-1"></a><span class="kn">import</span> <span class="nn">os</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-2-2"></a><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"OPENAI_API_KEY"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"your-openai-key"</span>
+</span></code></pre>
+      </div>
+      Wrapp the LLMs in <code>LangchainLLMWrapper</code>
+      <div class="language-python highlight">
+        <pre
+          id="__code_3"
+        ><span></span><button class="md-clipboard md-icon" title="Copy to clipboard" data-clipboard-target="#__code_3 > code"></button><code class="md-code__content"><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">ragas.llms</span> <span class="kn">import</span> <span class="n">LangchainLLMWrapper</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-3-2"></a><span class="kn">from</span> <span class="nn">langchain_openai</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-3-3"></a><span class="n">generator_llm</span> <span class="o">=</span> <span class="n">LangchainLLMWrapper</span><span class="p">(</span><span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">"gpt-4o"</span><span class="p">))</span>
+</span></code></pre>
+      </div>
+      <p></p>
+    </div>
+    <div class="tabbed-block">
+      <p>First you have to set your AWS credentials and configurations</p>
+      <p></p>
+      <div class="language-python highlight">
+        <pre
+          id="__code_4"
+        ><span></span><button class="md-clipboard md-icon" title="Copy to clipboard" data-clipboard-target="#__code_4 > code"></button><code class="md-code__content"><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-4-1"></a><span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-4-2"></a>    <span class="s2">"credentials_profile_name"</span><span class="p">:</span> <span class="s2">"your-profile-name"</span><span class="p">,</span>  <span class="c1"># E.g "default"</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-4-3"></a>    <span class="s2">"region_name"</span><span class="p">:</span> <span class="s2">"your-region-name"</span><span class="p">,</span>  <span class="c1"># E.g. "us-east-1"</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-4-4"></a>    <span class="s2">"model_id"</span><span class="p">:</span> <span class="s2">"your-model-id"</span><span class="p">,</span>  <span class="c1"># E.g "anthropic.claude-v2"</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-4-5"></a>    <span class="s2">"model_kwargs"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"temperature"</span><span class="p">:</span> <span class="mf">0.4</span><span class="p">},</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-4-6"></a><span class="p">}</span>
+</span></code></pre>
+      </div>
+      define you LLMs
+      <div class="language-python highlight">
+        <pre
+          id="__code_5"
+        ><span></span><button class="md-clipboard md-icon" title="Copy to clipboard" data-clipboard-target="#__code_5 > code"></button><code class="md-code__content"><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">langchain_aws.chat_models</span> <span class="kn">import</span> <span class="n">BedrockChat</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-5-2"></a><span class="kn">from</span> <span class="nn">ragas.llms</span> <span class="kn">import</span> <span class="n">LangchainLLMWrapper</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-5-3"></a><span class="n">generator_llm</span> <span class="o">=</span> <span class="n">LangchainLLMWrapper</span><span class="p">(</span><span class="n">BedrockChat</span><span class="p">(</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-5-4"></a>    <span class="n">credentials_profile_name</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">"credentials_profile_name"</span><span class="p">],</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-5-5"></a>    <span class="n">region_name</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">"region_name"</span><span class="p">],</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-5-6"></a>    <span class="n">endpoint_url</span><span class="o">=</span><span class="sa">f</span><span class="s2">"https://bedrock-runtime.</span><span class="si">{</span><span class="n">config</span><span class="p">[</span><span class="s1">'region_name'</span><span class="p">]</span><span class="si">}</span><span class="s2">.amazonaws.com"</span><span class="p">,</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-5-7"></a>    <span class="n">model_id</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">"model_id"</span><span class="p">],</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-5-8"></a>    <span class="n">model_kwargs</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">"model_kwargs"</span><span class="p">],</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="https://docs.ragas.io/en/latest/getstarted/rag_testset_generation/#__codelineno-5-9"></a><span class="p">))</span>
+</span></code></pre>
+      </div>
+      <p></p>
+    </div>
+  </div>
+  <div class="tabbed-control tabbed-control--prev" hidden="">
+    <button class="tabbed-button" tabindex="-1" aria-hidden="true"></button>
+  </div>
+  <div class="tabbed-control tabbed-control--next" hidden="">
+    <button class="tabbed-button" tabindex="-1" aria-hidden="true"></button>
+  </div>
+</div>
