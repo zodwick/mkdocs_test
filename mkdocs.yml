@@ -30,6 +30,7 @@ nav:
   - Home: index.md
   - Main:
     - example.md
+  - test: test.md
     
 # Material-Docs Theme
 theme:
