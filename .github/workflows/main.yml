@@ -18,5 +18,5 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: ragas # e.g. 'my-project'
-          # directory: site # e.g. 'dist'
+          directory: site # e.g. 'dist'
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
