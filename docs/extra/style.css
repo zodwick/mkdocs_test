@@ -1,32 +1,20 @@
-:root {
-  --md-primary-fg-color:               #FF0000; /* YouTube Red */
-  --md-primary-fg-color--light:        #FFCCCC;
-  --md-primary-fg-color--dark:         #CC0000;
+[data-md-color-scheme="ragas_light"] {
+  --md-primary-fg-color: #F4CE14; /* in header bg*/
+  --md-primary-bg-color: #21252f; /* in header text*/
+  --md-default-bg-color: #faf8f3; /* main bg */
+  --md-accent-fg-color: #ffb700df;  /* hover and other accent*/
+  --md-typeset-a-color: #c87d06; /* links */
+  --md-default-fg-color--light: #212121; /* h1 colour */
+  --md-typeset-color: #222529; /* text colour */ 
+}
 
-  --md-primary-bg-color:               #FFFFFF;
-  --md-primary-bg-color--light:        #F7F7F7;
 
-  --md-accent-fg-color:                #FF0000; /* YouTube Red */
-  --md-accent-fg-color--transparent:   rgba(255, 0, 0, 0.1);
-  --md-accent-bg-color:                #FFFFFF;
-
-  --md-accent-bg-color--light:         #F7F7F7;
-
-  --md-default-fg-color:               #0F0F0F;
-  --md-default-fg-color--light:        rgba(0, 0, 0, 0.54);
-  --md-default-fg-color--lighter:      rgba(0, 0, 0, 0.32);
-  --md-default-fg-color--lightest:     rgba(0, 0, 0, 0.07);
-  --md-default-bg-color:               #FFFFFF;
-  --md-default-bg-color--light:        rgba(255, 255, 255, 0.7);
-  --md-default-bg-color--lighter:      rgba(255, 255, 255, 0.3);
-  --md-default-bg-color--lightest:     rgba(255, 255, 255, 0.12);
-
-  --md-code-fg-color:                  #0F0F0F;
-  --md-code-bg-color:                  #F2F2F2;
-  
-  --md-warning-fg-color:               #FFAA00;
-  --md-warning-bg-color:               #FFF0D0;
-
-  --md-footer-fg-color:                #FFFFFF;
-  --md-footer-bg-color:                #181818;
+[data-md-color-scheme="ragas_dark"] {
+  --md-primary-fg-color: #090909; /* in header bg*/
+  --md-primary-bg-color: #21252f; /* in header text*/
+  --md-default-bg-color: #080a0c; /* main bg */
+  --md-accent-fg-color: #edc242;  /* hover and other accent*/
+  --md-typeset-a-color: #edc242; /* links */
+  --md-default-fg-color--light: #ffff; /* h1 colour */
+  --md-typeset-color: #eeeeee; /* text colour */ 
 }

@@ -35,12 +35,29 @@ nav:
 # Material-Docs Theme
 theme:
   name: material
+  logo:   /extra/ragas-logo.png
 
-  palette:
-    scheme: slate
-    primary: custom
 
-    accent: custom
+  palette: 
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: ragas_light 
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: ragas_dark
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
   features:
     - content.tabs.link
     - content.code.annotate
@@ -81,3 +98,6 @@ markdown_extensions:
 # Extra CSS
 extra_css:
   - extra/style.css
+
+extra_javascript:
+  - extra/border.js
