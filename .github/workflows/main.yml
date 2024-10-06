@@ -12,11 +12,11 @@ jobs:
       # Run your project's build step
       # - name: Build
       #   run: npm install && npm run build
-      - name: Publisha
+      - name: Publish
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: mkdocs_test # e.g. 'my-project'
+          projectName: ragas # e.g. 'my-project'
           directory: site # e.g. 'dist'
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
