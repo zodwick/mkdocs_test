@@ -9,9 +9,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      # Run your project's build step
-      # - name: Build
-      #   run: npm install && npm run build
+
+      # Install Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      # # Install dependencies (if needed)
+      # - name: Install dependencies
+      #   run: |
+      #     python -m pip install --upgrade pip
+      #     pip install -r requirements.txt # Assuming your project has a requirements.txt file
+
+      # Run your Python script to generate site/index.html
+      - name: Run script to generate index.html
+        run: python docs/scripts/test.py
+
+      # Publish to Cloudflare Pages
       - name: Publish
         uses: cloudflare/pages-action@v1
         with:
